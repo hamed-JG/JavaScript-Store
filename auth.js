@@ -7,14 +7,15 @@ const inputsBox = document.querySelectorAll("input");
 const loginButton = document.querySelector("button");
 
 const submitHandler = async (event) => {
+  console.log(event);
   event.preventDefault();
 
   const username = inputsBox[0].value;
   const password = inputsBox[1].value;
 
   const validation = validateForm(username, password);
-  if (validation) return;
-  
+  if (!validation) return;
+
   const response = await postData("auth/login", { username, password });
   setCookie(response.token);
   location.assign("index.html");
